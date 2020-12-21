@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/activity")
+@CrossOrigin("http://localhost:4200")
 public class ActivityController {
 
     @Autowired

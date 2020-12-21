@@ -11,6 +11,7 @@ public interface ListCoalitionRepository extends MongoRepository<ListCoalition ,
     public boolean existsByIdAndNom (Integer id , String nom);
 
     public List<ListCoalition> findByGouvernorat (String gouvernorat);
+
     public List<ListCoalition> findByParti (String gouvernorat);
 
     //les liste qui ont plus de 50 ans et moins de 100 ans

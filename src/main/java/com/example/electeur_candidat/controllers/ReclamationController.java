@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/Reclamatioon")
+@CrossOrigin("http://localhost:4200")
 public class ReclamationController {
 
     @Autowired

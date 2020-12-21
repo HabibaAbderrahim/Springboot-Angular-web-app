@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/coalition")
+@CrossOrigin("http://localhost:4200")
 public class ListCoalitionController {
 
     @Autowired

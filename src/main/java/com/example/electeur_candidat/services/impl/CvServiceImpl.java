@@ -1,5 +1,6 @@
 package com.example.electeur_candidat.services.impl;
 
+import com.example.electeur_candidat.DTO.MessageResponse;
 import com.example.electeur_candidat.entities.Cv;
 import com.example.electeur_candidat.entities.Experience;
 import com.example.electeur_candidat.entities.Formation;
@@ -48,4 +49,20 @@ public class CvServiceImpl implements CvService {
         }
         System.out.println(score);
         return scoreT ;   }
+
+    @Override
+    public List<Cv> allCv() {
+        return cvRepository.findAll();
+    }
+
+    @Override
+    public MessageResponse save(Cv cv) {
+        return null;
+    }
+
+    @Override
+    public Cv findById(Integer id) {
+       
+        return cvRepository.findById(id).orElse(null);
+    }
 }

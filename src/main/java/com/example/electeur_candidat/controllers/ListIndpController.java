@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/indp")
+@CrossOrigin("http://localhost:4200")
 class ListIndpController {
     @Autowired
     private ListIndepedanteService listIndepedanteService;
