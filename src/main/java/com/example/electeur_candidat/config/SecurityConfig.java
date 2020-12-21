@@ -1,6 +1,6 @@
 package com.example.electeur_candidat.config;
 
-/*import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,19 +24,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //redif bech nod5el fi 5edmtou
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        //desactifer CSRF token (gener automatiquement par spring sec or i will use a JWT token !)
         http.csrf().disable();
+        //change sec Mannagement (Im not using basic web security)
+        //Gere session spring security
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //7alit  el la3b 3al login login accesible lel ness el kol
         http.authorizeRequests().antMatchers("/login").permitAll();
 
         //bech nal3eb aal access le requet mte3i
-        //ay requet apart el login lezemha authentification
+        //ay requet apart el login bech tlansiha lezemha authentification
         http.authorizeRequests().anyRequest().authenticated();
     }
     @Bean
     public AuthenticationManager authenticationManager() throws Exception{
+        //auth manager Class mere
         return super.authenticationManager();
     }
 }
-*/
