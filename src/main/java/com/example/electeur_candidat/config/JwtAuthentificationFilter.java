@@ -3,8 +3,8 @@ package com.example.electeur_candidat.config;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.electeur_candidat.entities.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import io.jsonwebtoken.Jwts;
-//import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +26,7 @@ import java.util.List;
 @Configuration
 public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFilter {
 
+    //injection des properties
     @Value("${jwt.signin-key}")
     private String signkey;
     @Value("${jwt.header}")
@@ -50,7 +51,7 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
         try {
             usera = mapper.readValue(request.getInputStream(), Users.class);
 
-            //System.out.println(usera);
+            System.out.println(usera);
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -62,19 +63,19 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
     //F2 TOKEN
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
 
+        String username = authResult.getName();
+        List<String>  authorities = new ArrayList<>();
+        authResult.getAuthorities().forEach(role -> {
+            authorities.add(role.getAuthority());
+        });
+        String token =Jwts.builder().setSubject(username).claim("roles", authorities).setIssuedAt(new Date(System.currentTimeMillis())).
+                setExpiration(new Date(System.currentTimeMillis()+ expTime)).signWith(SignatureAlgorithm.HS384, signkey.getBytes()).
+                compact();
 
-//           String username = authResult.getName();
-//           List<String>  authorities = new ArrayList<>();
-//           authResult.getAuthorities().forEach(role ->{
-//               authorities.add(role.getAuthority());
-//           });
-//           String token = Jwts.builder().setSubject(username).claim("roles", authorities).setIssuedAt(new Date(System.currentTimeMillis())).
-//                   setExpiration(new Date(System.currentTimeMillis()+ expTime)).signWith(SignatureAlgorithm.HS512, signkey.getBytes()).
-//                   compact();
-//
-//           response.addHeader(header , prefix+token);
-//    }
+        response.addHeader(header , prefix+token);
     }
 }
+
