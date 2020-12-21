@@ -4,11 +4,13 @@ import com.example.electeur_candidat.DTO.MessageResponse;
 import com.example.electeur_candidat.entities.Justificatif;
 import com.example.electeur_candidat.services.JustificatifService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/justif")
 @CrossOrigin("http://localhost:4200")
+@PreAuthorize("haRole('ROLE_ADMIN')")
 public class JustifController {
 
     @Autowired

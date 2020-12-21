@@ -7,13 +7,16 @@ import com.example.electeur_candidat.repositories.ContactRepository;
 import com.example.electeur_candidat.repositories.UserRepository;
 import com.example.electeur_candidat.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UsersServicesImpl implements UsersService {
+public class UsersServicesImpl implements UsersService   {
 
     @Autowired
     private UserRepository userRepository ;
@@ -84,5 +87,10 @@ public class UsersServicesImpl implements UsersService {
     @Override
     public MessageResponse changePassword(PasswordDTO pwdDTO) {
         return null;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findOneByUsername(username);
     }
 }

@@ -4,6 +4,7 @@ import com.example.electeur_candidat.DTO.MessageResponse;
 import com.example.electeur_candidat.entities.Reclamation;
 import com.example.electeur_candidat.services.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -11,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/Reclamatioon")
 @CrossOrigin("http://localhost:4200")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_ELECTEUR')")
 public class ReclamationController {
 
     @Autowired

@@ -8,5 +8,6 @@ public interface UserRepository extends MongoRepository<Users, Integer> {
 
     boolean existsByUsername (String uesrname);
     boolean existsByUsernameAndId(String username , Integer id);
+    public Users findByUsername(String username);
 
 }
