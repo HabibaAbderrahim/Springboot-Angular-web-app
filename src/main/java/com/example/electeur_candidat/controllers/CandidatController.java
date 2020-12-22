@@ -29,31 +29,31 @@ public class CandidatController {
         return candidatService.allCandidatSortedByScore();
     }
 
-    @PreAuthorize("haRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     public MessageResponse add(@RequestBody Candidat candidat){
         return candidatService.save(candidat);
     }
 
-    @PreAuthorize("haRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/edit")
     public MessageResponse edit(@RequestBody Candidat candidat ){
         return candidatService.update(candidat);
     }
 
-    @PreAuthorize("haRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("del/{id}")//pathParam
     public MessageResponse delete(@PathVariable("id") Integer id){
         return candidatService.delete(id);
     }
 
-    @PreAuthorize("haRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("find/{id}")
     public Candidat findCandidat(@PathVariable Integer id){
         return candidatService.findById(id);
     }
 
-    @PreAuthorize("haRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("find/{id}/{email}")
     public Candidat findCandidatByIdAndMail(@PathVariable Integer id , @PathVariable String email){
         return candidatService.findByIdAndEmail(id , email);

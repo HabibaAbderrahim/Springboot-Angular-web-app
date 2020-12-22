@@ -3,6 +3,7 @@ package com.example.electeur_candidat;
 import com.example.electeur_candidat.entities.*;
 import com.example.electeur_candidat.repositories.*;
 import com.example.electeur_candidat.services.CandidatService;
+import com.example.electeur_candidat.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 
@@ -30,9 +31,14 @@ public class Test implements CommandLineRunner {
     ListPartisienneRepository listPartisienneRepository ;
 
     @Autowired
-    CandidatService candidatService;
+    private UsersService usersService ;
+    @Autowired
+    private UserRepository userRepository ;
     @Override
     public void run(String... args) throws Exception {
+
+
+
 
 //        Formation form = new Formation();
 //        form.setId(1);
@@ -198,18 +204,19 @@ public class Test implements CommandLineRunner {
 
 
 
-        Candidat candida = new Candidat();
-        candida.setId(5);
-        candida.setNom("ahmed");
-        candida.setPrenom("binou");
-        candida.setPosition(1);
-        candida.setAge(40);
-        candida.setEmail("Ahmedb@gmail.com");
-        candida.setJob("entrepreneur");
-        //candidat.setPhoto(data);
-        candida.setFacebook("ahmedAhmedni");
-        candida.setTwitter("ahmedAhmedninii");
-        candidatRepository.save(candida);
+//        Candidat candida = new Candidat();
+//        candida.setId(5);
+//        candida.setNom("ahmed");
+//        candida.setPrenom("binou");
+//        candida.setPosition(1);
+//        candida.setAge(40);
+//        candida.setEmail("Ahmedb@gmail.com");
+//        candida.setJob("entrepreneur");
+//        //candidat.setPhoto(data);
+//        candida.setFacebook("ahmedAhmedni");
+//        candida.setTwitter("ahmedAhmedninii");
+//        candidatRepository.save(candida);
+
 
     }
 }

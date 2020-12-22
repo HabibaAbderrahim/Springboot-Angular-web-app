@@ -33,12 +33,12 @@ public class ElecteurCandidatApplication  implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 //		Users user = new Users();
-//		user.setId(4);
-//		user.setNom("naja");
-//		user.setEmail("najla@gamil.com");
-//		user.setUsername("user");
-//		user.setPassword("user1");
-//		user.setRole("ELECTEUR");
+//		user.setId(3);
+//		user.setNom("Rami");
+//		user.setEmail("Rami@gamil.com");
+//		user.setUsername("admin");
+//		user.setPassword("admin");
+//		user.setRole("ADMIN");
 //		usersService.save(user);
 
 		}

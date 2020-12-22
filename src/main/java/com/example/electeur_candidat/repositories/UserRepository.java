@@ -8,6 +8,7 @@ public interface UserRepository extends MongoRepository<Users, Integer> {
 
     boolean existsByUsername (String uesrname);
     boolean existsByUsernameAndId(String username , Integer id);
-    public Users findByUsername(String username);
+    //Only one sachant que username traité pour quil soit unique dans usersService !! juste en cas ou
+    public Users findOneByUsername(String username);
 
 }

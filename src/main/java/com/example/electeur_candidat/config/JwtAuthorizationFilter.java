@@ -22,10 +22,12 @@ import io.jsonwebtoken.Jwts;
 
 @Configuration
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
-    @Value("${jwt.signin.key}")
-    private String signinKey;
+
+    //injection des properties
+    @Value("${jwt.signin-key}")
+    private String signkey;
     @Value("${jwt.header}")
-    private String hearder;
+    private String header;
     @Value("${jwt.prefix}")
     private String prefix;
 
@@ -33,16 +35,16 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String head = request.getHeader(hearder);
+        String head = request.getHeader(header);
 
         if (head == null || !head.startsWith(prefix)) {
             filterChain.doFilter(request, response);
             return;
         }
         String token = head.replace(prefix, "");
-        Claims claims = Jwts.parser().setSigningKey(signinKey.getBytes()).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(signkey.getBytes()).parseClaimsJws(token).getBody();
         String username = claims.getSubject();
-        List<String> roles = (List<String>) claims.get("roles");
+        List<String> roles = (List<String>) claims.get("roles");//roles ta3 tkn
         List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(role -> {
             authorities.add(new SimpleGrantedAuthority(role));

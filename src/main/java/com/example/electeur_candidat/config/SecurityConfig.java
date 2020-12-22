@@ -14,6 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -41,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //desactifer CSRF token (gener automatiquement par spring sec or i will use a JWT token !)
         http.csrf().disable();
-        //AS CROSS ORIGINE
+        //AS CROSS ORIGINE!!!!!!
         http.cors();
         //change sec Mannagement (Im not using basic web security)
         //Gere session spring security
@@ -66,6 +69,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui.html", "/webjars/**");
 
     }
+
+    //FOR THE FRONT
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedHeader("*");
+
+        configuration.addAllowedMethod("*");
+
+        configuration.addExposedHeader("Authorization");
+        source.registerCorsConfiguration("/**", configuration);
+        return new CorsFilter(source);}
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception{

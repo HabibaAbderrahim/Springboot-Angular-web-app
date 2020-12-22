@@ -33,9 +33,11 @@ public class CandidatServiceImpl implements CandidatService {
     @Transactional //hibernate session
     public MessageResponse save(Candidat candidat) {
 
-        if (contactRepository.existsByEmail(candidat.getEmail())) {
-            return new MessageResponse(false, "Email candidat existant !!");
+        boolean exist= candidatRepository.existsByEmail(candidat.getEmail());
+        if(exist){
+            return new MessageResponse(false,"Fail Email exist");
         }
+
 
         candidatRepository.save(candidat);
 
