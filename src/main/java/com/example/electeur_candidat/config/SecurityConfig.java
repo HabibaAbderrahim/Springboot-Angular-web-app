@@ -85,6 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return new CorsFilter(source);}
 
+        //Filter authenticatian
+
+    //caused By authefi manager must be defiened
     @Bean
     public AuthenticationManager authenticationManager() throws Exception{
         //auth manager Class mere

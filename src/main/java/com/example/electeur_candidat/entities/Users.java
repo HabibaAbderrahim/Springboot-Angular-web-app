@@ -29,11 +29,12 @@ public class Users extends Contact implements UserDetails {
                 "} " + super.toString();
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
+        //role de kol ut ycnnty
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));//cnv
         return authorities;
     }
 

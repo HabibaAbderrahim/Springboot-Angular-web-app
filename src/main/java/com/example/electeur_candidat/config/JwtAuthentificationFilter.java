@@ -36,6 +36,8 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
     @Value("${jwt.exp-time}")
     private long expTime;
 
+
+    //redif method setAuthetf
     @Autowired
     @Override
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
@@ -46,12 +48,12 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         Users usera = new Users();
-        //req traja3 json lezem nraj3 objet (user) b jackon
+        //request traja3 json lezem nraj3 objet (user)
         ObjectMapper mapper = new ObjectMapper();
         try {
             usera = mapper.readValue(request.getInputStream(), Users.class);
 
-            System.out.println(usera);
+            //System.out.println(usera);
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -60,17 +62,19 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
 
     }
     //F1 T3ADIT AAL AUTHENTIF
-    //F2 TOKEN
+    //le faite s7i7 net3ada F2 TOKEN
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
 
+        //n7atharhom lel token
         String username = authResult.getName();
         List<String>  authorities = new ArrayList<>();
         authResult.getAuthorities().forEach(role -> {
             authorities.add(role.getAuthority());
         });
+        //sna3t tokn
         String token =Jwts.builder().setSubject(username).claim("roles", authorities).setIssuedAt(new Date(System.currentTimeMillis())).
                 setExpiration(new Date(System.currentTimeMillis()+ expTime)).signWith(SignatureAlgorithm.HS384, signkey.getBytes()).
                 compact();

@@ -42,19 +42,19 @@ public class CandidatController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("del/{id}")//pathParam
+    @DeleteMapping("/del/{id}")//pathParam
     public MessageResponse delete(@PathVariable("id") Integer id){
         return candidatService.delete(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("find/{id}")
+    @GetMapping("/find/{id}")
     public Candidat findCandidat(@PathVariable Integer id){
         return candidatService.findById(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("find/{id}/{email}")
+    @GetMapping("/find/{id}/{email}")
     public Candidat findCandidatByIdAndMail(@PathVariable Integer id , @PathVariable String email){
         return candidatService.findByIdAndEmail(id , email);
     }
